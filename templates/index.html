@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My database</title>
+    </head>
+    <body>
+        <h1>My database</h1>
+
+        {% for item in users %}
+        <p>{{item.name}}</p>
+        {% endfor %}
+
+    </body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    console.log("abc")
+    $.ajax({
+			//	url: '/bbox/'  + image_id,
+                url: '/show',
+				type: 'GET',
+				//data: JSON.stringify({"bboxes": bboxes, "item_id": item_id, "item_name": item_name,}),
+				success: function(result) {
+					console.log("result", result)
+				//	location.reload();
+				}
+			});
+
+</script>
