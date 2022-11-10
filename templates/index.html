@@ -9,7 +9,10 @@
         {% for item in users %}
         <p>{{item.name}}</p>
         {% endfor %}
-
+        
+        {% for name in show%}
+        <p>{{name["name"]}}</p>
+        {% endfor %}
     </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -18,12 +21,18 @@
     $.ajax({
 			//	url: '/bbox/'  + image_id,
                 url: '/show',
-				type: 'GET',
+				type: 'GET', 
 				//data: JSON.stringify({"bboxes": bboxes, "item_id": item_id, "item_name": item_name,}),
-				success: function(result) {
-					console.log("result", result)
+				success: function(names) {
+                    console.log("eeeee")
+					//console.log("result", result)
 				//	location.reload();
 				}
 			});
+    $.ajax({
+        url: '/add',
+        type: '/POST',
+
+    })
 
 </script>
