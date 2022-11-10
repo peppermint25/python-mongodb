@@ -9,10 +9,25 @@
         {% for item in users %}
         <p>{{item.name}}</p>
         {% endfor %}
-        
-        {% for name in show%}
-        <p>{{name["name"]}}</p>
+        <table border="2px">
+            <tr>
+                <td> Name </td>
+                <td> Password </td>
+            </tr>
+        {% for name, password in users %}
+            <tr>
+                <td> {{names}}</td>
+                <td> {{passwords}}</td>
+            </tr>
         {% endfor %}
+        </table>
+        <form method="post" action="/add">
+            <label for="name">Name</label>
+            <input type="text" name="name"></input><br>
+            <label for="passwords">Passwords</label>
+            <input type="text" name="passwords"></input><br>
+            <button type="submit">Submit</button>
+        </form>
     </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -23,7 +38,8 @@
                 url: '/show',
 				type: 'GET', 
 				//data: JSON.stringify({"bboxes": bboxes, "item_id": item_id, "item_name": item_name,}),
-				success: function(names) {
+				success: function(names, passwords) {
+                    
                     console.log("eeeee")
 					//console.log("result", result)
 				//	location.reload();
