@@ -42,13 +42,10 @@ def add():
     
     return jsonify(**{"status": 200, "response": obj})
 
-
-    
-
-
 @app.route("/delete/<id>", methods=['DELETE'])
 def delete(id):
-    client.db.test.delete_one({'_id': ObjectId(id)})
+    print (id)
+    client.db.lietotaji.delete_one({'_id': ObjectId(id)})
     resp = jsonify('User deleted successfully!')
     resp.status_code = 200
     return resp

@@ -25,7 +25,7 @@
                         <td class="name"> {{lietotajs.name}}</td>
                         <td class="password"> {{lietotajs.password}}</td>
                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-{{lietotajs._id}}">Edit </button></td>
-                        <td><button id="delete_button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete-{{lietotajs._id}}">Delete </button></td>
+                        <td><button id="delete_button" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{lietotajs._id}}">Delete </button></td>
                     </tr>
                     
                     <div class="modal fade" id="delete-{{lietotajs._id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -33,10 +33,11 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h2>Delete user</h2>
+                                    <button type="button" class="close" data-bs-dismiss="modal" ria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 </div>
                                 <div class="modal-body">
                                     <p>Are you sure you want to delete {{lietotajs._id}} {{lietotajs.name}} with password {{lietotajs.password}}?</p>
-                                    <button type="button" class="btn btn-primary" value="Delete" onclick="delete_row('delete', {{lietotajs._id}})">Delete</button>
+                                    <button type="button" class="btn btn-danger" value="Delete" onclick="delete_row('{{lietotajs._id}}')">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +48,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h2>Edit user </h2>
-                                    <button type="button" class="close" data-dismiss="modal" ria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <button type="button" class="close" data-bs-dismiss="modal" ria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 </div>
                                 <div class="modal-body">
                                     <form>
@@ -58,8 +59,8 @@
                                             <input type="text" id="edit-password-{{lietotajs._id}}" class="form-control" value="{{ lietotajs.password }}"  name="Password" required>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default btn-danger" data-dismiss="modal"><i class="fa fa-remove" aria-hidden="true"></i>Cancel</button>
-                                            <button type="button" onclick="edit_row( '{{lietotajs._id}}')" class="btn btn-primary" style="width:100px">Submit</button>
+                                            <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal"></i>Cancel</button>
+                                            <button type="button" data-bs-dismiss="modal" onclick="edit_row( '{{lietotajs._id}}')" class="btn btn-success" style="width:100px">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -71,12 +72,12 @@
                 </tbody>
             </table>        
 
-            <input type="button" href="#add"  data-bs-toggle="modal" data-bs-target="#add_row" class="btn btn-primary" name="add" value="Add">
+            <input type="button" href="#add"  data-bs-toggle="modal" data-bs-target="#add_row" class="btn btn-success" name="add" value="Add">
             <div class="modal fade" id="add_row" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-bs-dismiss="modal" ria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title"> Add to databse </h4>
                         </div>
                         <div class="modal-body">
@@ -88,8 +89,8 @@
                                     <input type="text" id="add-password" class="form-control" value=" " name="Password" required>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default btn-danger" data-dismiss="modal"><i class="fa fa-remove" aria-hidden="true"></i>Cancel</button>
-                                    <button type="button" onclick="add_user()" class="btn btn-primary" style="width:100px">Submit</button>
+                                    <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" data-bs-dismiss="modal" onclick="add_user()" class="btn btn-success" style="width:100px">Submit</button>
                                 </div>
                             </form>
                             
@@ -135,7 +136,7 @@
         })
     }
 
-    function delete_row(action, id){
+    function delete_row(id){
         $.ajax({
             url: '/delete/' + id,
             type: 'DELETE',
@@ -144,6 +145,7 @@
 
             success: function(erase){
                 console.log("aaaaaaaaaaaaaaaaaaa")
+                $("#"+id).remove();
             }
         })
     }
@@ -167,10 +169,15 @@
             success: function(editrow){
                 console.log(editrow)
                 
-                var row = $(id)
-                
+                var response = editrow.response
+                var name = response.name
+                var password = response.password
+                console.log(name, password)
+                var row = $("#"+id)
+                var nameedit = $("#"+id).find(".name").text(name)
+                var passwordedit = $("#"+id).find(".password").text(password)
 
-                console.log(row) 
+                console.log("row", row) 
             }
         })
     }
