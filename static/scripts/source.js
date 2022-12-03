@@ -47,8 +47,8 @@ function edit_row(id){
         }
     })
 }
-  
+
 for (const button of document.querySelectorAll('.delete-button')) {
     button.addEventListener('click', delete_row);
 }
-document.querySelector('#add-button').addEventListener('click', add_user())
+$('#add-button').onclick = add_user;

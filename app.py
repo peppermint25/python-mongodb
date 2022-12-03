@@ -2,12 +2,12 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask import Flask, jsonify, render_template, request
 from pymongo import MongoClient
+from collections.abc import MutableMapping
 
 app = Flask(__name__)
 #client = MongoClient("mongodb+srv://mint:datubaze@cluster0.aiihewy.mongodb.net/?retryWrites=true&w=majority")
-client = MongoClient("mongodb://localhost:27017/")
-
-db = client.test
+client = MongoClient("mongodb://db:27017/")
+#client = MongoClient("localhost:27017")
 
 @app.route("/", methods=["GET"])
 def main():
@@ -43,4 +43,4 @@ def update(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
