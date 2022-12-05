@@ -29,7 +29,10 @@ function delete_row(e){
     })
 }
 
-function edit_row(id){
+function edit_row(g){
+    console.log("edit")
+    var button = $(g.target);
+    var id = button.attr("data-id");
     var data_obj = {
         name : $("#edit-name-"+id).val(),
         password : $("#edit-password-"+id).val(),
@@ -50,4 +53,12 @@ function edit_row(id){
 for (const button of document.querySelectorAll('.delete-button')) {
     button.addEventListener('click', delete_row);
 }
-$('#add-button').onclick = add_user;
+
+//$('#add-button').addEventListener('click', add_user)
+
+for (const button of document.querySelectorAll('.edit-button')) {
+    button.addEventListener('click', edit_row);
+}
+
+const add = document.getElementById("add-button");
+add.addEventListener('click', add_user);
