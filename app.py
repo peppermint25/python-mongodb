@@ -5,7 +5,6 @@ from pymongo import MongoClient
 from collections.abc import MutableMapping
 
 app = Flask(__name__)
-#client = MongoClient("mongodb+srv://mint:datubaze@cluster0.aiihewy.mongodb.net/?retryWrites=true&w=majority")
 client = MongoClient("mongodb://db:27017/")
 #client = MongoClient("localhost:27017")
 

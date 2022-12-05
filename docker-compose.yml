@@ -2,7 +2,6 @@ version: "3.9"
 services: 
   app: 
     build: .
-    #command: python -u app.py
     ports:
       - "5000:5000"
     volumes:
@@ -11,8 +10,6 @@ services:
      - db
   db:
     image: mongo
-    #ports:
-    # - 27017:27017
     restart: always
     volumes:
       - mongodata:/data/db

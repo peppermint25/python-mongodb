@@ -34,7 +34,6 @@ function edit_row(id){
         name : $("#edit-name-"+id).val(),
         password : $("#edit-password-"+id).val(),
     }
-    console.log(data_obj)
     $.ajax({
         url: '/edit_profile/' + id,
         type: 'PUT',
