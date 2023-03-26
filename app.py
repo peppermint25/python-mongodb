@@ -40,6 +40,5 @@ def update(id):
     client.db.lietotaji.update_one({"_id" : ObjectId(id)},{ "$set": edit})
     return jsonify(**{"status": 200, "response": edit})
 
-
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
