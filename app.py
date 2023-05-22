@@ -41,6 +41,19 @@ def delete_user(entry_id):
     else:
         return jsonify({"message": "User not found in leaderboard"})
 
+@app.route("/leaderboard-data/<entry_id>/update", methods=["PUT"])
+def update_gametime(entry_id):
+    updated_username = request.json['username']
+    updated_gametime = request.json['gametime']
+    result = collection.update_one(
+        {"_id": ObjectId(entry_id)},
+        {"$set": {"username" : updated_username,"gametime": updated_gametime}}
+    )
+    if result.modified_count > 0:
+        return jsonify({"message": "Entry updated"})
+    else:
+        return jsonify({"message": "Entry not found"})
+
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
